@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:get/instance_manager.dart';
 import 'package:page/controller/page_controller.dart';
+import 'package:page/widget/custom_cart.dart';
 
 import '../widget/custom_page.dart';
 
@@ -29,24 +31,29 @@ class _NextPageState extends State<NextPage> {
         // child: Center(
         //   child: Text("data"),
         // ),
-        child: Column(
-          children: [
-            Expanded(
-              child: SingleChildScrollView(
-                physics: const AlwaysScrollableScrollPhysics(),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: controller.wishList.asMap().entries.map((e) {
-                    return Container(
-                      child: Text(e.value.name.toString()),
-                    );
-                  }).toList(),
+        child: Obx(
+          () => Column(
+            children: [
+              Expanded(
+                child: SingleChildScrollView(
+                  physics: const AlwaysScrollableScrollPhysics(),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: controller.wishList.asMap().entries.map((e) {
+                      return CustomCart(
+                        userId: e.value.id,
+                        id: 0,
+                        title: e.value.name,
+                        body: '',
+                      );
+                    }).toList(),
+                  ),
                 ),
               ),
-            ),
-            showBottonPage()
-          ],
+              showBottonPage()
+            ],
+          ),
         ),
       ),
     );

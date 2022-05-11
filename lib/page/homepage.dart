@@ -15,32 +15,25 @@ class HomePage extends StatelessWidget {
         appBar: AppBar(
           title: const Text("GET API"),
         ),
-        body: GetBuilder(
-          init: con,
-          builder: (_) {
-            return GestureDetector(
-              onTap: () {
-                debugPrint("==============hello done");
-               
-                // context.pushRoute(const NextPageRouter());
-                // context.router.pushNamed("nextpage");
+        body: GestureDetector(
+          onTap: () {
+            debugPrint("==============hello done");
 
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => const NextPage()));
-                con.update();
-              },
-              child: Center(
-                child: Container(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(5),
-                      color: Colors.amber),
-                  child: const Text("Get Api"),
-                ),
-              ),
-            );
+            // context.pushRoute(const NextPageRouter());
+            // context.router.pushNamed("nextpage");
+
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => const NextPage()));
+            con.update();
           },
+          child: Center(
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(5), color: Colors.amber),
+              child: const Text("Get Api"),
+            ),
+          ),
         ));
   }
 }

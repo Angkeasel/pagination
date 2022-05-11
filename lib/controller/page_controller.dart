@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:page/helper/api_base_helper.dart';
 import 'package:page/models/page_model.dart';
@@ -26,13 +25,13 @@ class AppController extends GetxController {
             isAuthorize: true)
         .then((response) {
       lastpage.value = response['meta']['last_page'];
-      // wishList.clear();
-      // debugPrint("=======????${lastpage.value}");
+      wishList.clear();
+      //debugPrint("=======????${lastpage.value}");
       response['result'].map((e) {
         wishList.add(WishModel.fromJson(e['product']));
       }).toList();
       isLoading(false);
-      debugPrint("=======????$wishList");
+      // debugPrint("=======????$wishList");
       update();
     });
     return wishList;
@@ -56,13 +55,13 @@ class AppController extends GetxController {
     }
   }
 
-  Future onRefresh() async {
-    getData(page.value);
-  }
+  // Future onRefresh() async {
+  //   getData(page.value);
+  // }
 
   @override
   void onInit() {
-    getData(1);
+    getData(page.value);
     super.onInit();
   }
 }
