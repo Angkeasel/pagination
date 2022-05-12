@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import 'package:page/page/homepage.dart';
+import 'package:page/page/onboarding/original_product.dart';
 
 import 'package:url_strategy/url_strategy.dart';
 
@@ -17,7 +17,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const GetMaterialApp(
-      home: HomePage(),
+      debugShowCheckedModeBanner: false,
+      home: OriginalProductScreen(),
     );
   }
 }

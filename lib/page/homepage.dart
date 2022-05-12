@@ -13,8 +13,7 @@ class HomePage extends StatelessWidget {
     final con = Get.put(AppController());
     return Scaffold(
         appBar: AppBar(
-          title: const Text("GET API"),
-        ),
+            title: const Text("GET API"), automaticallyImplyLeading: false),
         body: GestureDetector(
           onTap: () {
             debugPrint("==============hello done");
