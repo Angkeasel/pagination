@@ -18,6 +18,7 @@ class _NextPageState extends State<NextPage> {
 
   @override
   void initState() {
+    controller.page(1);
     controller.getData(1);
     super.initState();
   }

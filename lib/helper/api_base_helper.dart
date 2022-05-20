@@ -27,7 +27,7 @@ class ApiBaseHelper extends GetConnect {
       bool isConvertToByte = false}) async {
     // final token = await LocalStorage.getLocalData('token');
     var token =
-        'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjUyNzU3MTc2LCJpYXQiOjE2NTIxNTIzNzYsImp0aSI6ImU4YTM4MjU3NmMyZDQwMjdhZTU2MzgyN2UxYjVkMzJiIiwidXNlcl9pZCI6MTQ1fQ.z79pk9SZ6JajkHywGGZgbvPYPijyXIJa6xaqbzzXEfM';
+        'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjUzNDUyNTMwLCJpYXQiOjE2NTI4NDc3MzAsImp0aSI6IjFkZTFjNTAyODYxNjRlYTJhNDIyNGVmNWMyMjc2OGYyIiwidXNlcl9pZCI6MTI2fQ._zoNzt2O4mZzFgRxwxflAIMYIsTfnb2GsQx6f6EbxxE';
     final fullUrl = baseurl + url;
     Map<String, String> _header = {
       'Content-Type': 'application/json',

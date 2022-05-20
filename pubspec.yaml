@@ -36,6 +36,7 @@ dependencies:
   get: ^4.6.1
   global_configuration: ^2.0.0-nullsafety.1
   json_annotation: ^4.5.0
+  page_view_dot_indicator: ^1.1.0
   shimmer: ^2.0.0
   url_strategy: ^0.2.0
 

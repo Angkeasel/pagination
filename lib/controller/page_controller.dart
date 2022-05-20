@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:page/helper/api_base_helper.dart';
 import 'package:page/models/page_model.dart';
@@ -5,7 +6,7 @@ import 'package:page/models/wish_model.dart';
 
 class AppController extends GetxController {
   /////////
-  ApiBaseHelper apiBaseHelper = ApiBaseHelper();
+  final ApiBaseHelper _apiBaseHelper = ApiBaseHelper();
   final pageList = <PageModel>[];
   final pageList2 = <PageModel>[];
   final isLoading = false.obs;
@@ -18,7 +19,7 @@ class AppController extends GetxController {
 
   Future<List<WishModel>> getData(int page) async {
     isLoading(true);
-    await apiBaseHelper
+    await _apiBaseHelper
         .onNetworkRequesting(
             url: 'wishlist/get?current_page=$page',
             methode: METHODE.get,
@@ -33,8 +34,62 @@ class AppController extends GetxController {
       isLoading(false);
       // debugPrint("=======????$wishList");
       update();
+    }).onError((ErrorModel error, stackTrace) {
+      debugPrint(error.statusCode.toString());
     });
     return wishList;
+  }
+  /////////
+
+  final isLoadingMore = false.obs;
+  Future<List<WishModel>> getPagination(int page) async {
+    if (page == 1) {
+      isLoading(true); //shimmer
+      isLoadingMore(false); //loading...
+    }
+    if (page != 1) {
+      isLoading(false);
+      isLoadingMore(true);
+    }
+
+    await _apiBaseHelper
+        .onNetworkRequesting(
+            url: 'wishlist/get?current_page=$page',
+            methode: METHODE.get,
+            isAuthorize: true)
+        .then((response) {
+      if (page == 1) {
+        wishList.clear();
+      }
+      lastpage.value = response['meta']['last_page'];
+
+      response['result'].map((e) {
+        wishList.add(WishModel.fromJson(e['product']));
+      }).toList();
+      isLoading(false);
+      isLoadingMore(false);
+      // debugPrint("=======????$wishList");
+      update();
+    }).onError((ErrorModel error, stackTrace) {
+      isLoading(false);
+      isLoadingMore(false);
+      debugPrint(error.statusCode.toString());
+    });
+    return wishList;
+  }
+
+  infinitPage() {
+    page.value < lastpage.value
+        ? () {
+            page.value++;
+            getPagination(page.value);
+          }()
+        : Get.snackbar("Last Page", '', snackPosition: SnackPosition.BOTTOM);
+  }
+
+  Future onRefr() async {
+    page(1);
+    getPagination(1);
   }
 
   discrease() {
@@ -62,6 +117,7 @@ class AppController extends GetxController {
   @override
   void onInit() {
     getData(page.value);
+
     super.onInit();
   }
 }

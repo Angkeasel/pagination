@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import 'package:page/page/onboarding/original_product.dart';
+import 'package:page/config/router/router.gr.dart';
 
 import 'package:url_strategy/url_strategy.dart';
 
@@ -16,9 +15,12 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const GetMaterialApp(
+    AppRouter appRouter = AppRouter();
+    return GetMaterialApp.router(
       debugShowCheckedModeBanner: false,
-      home: OriginalProductScreen(),
+      routeInformationParser: appRouter.defaultRouteParser(),
+      routerDelegate: appRouter.delegate(),
+      // home: StartupSlide(),
     );
   }
 }
